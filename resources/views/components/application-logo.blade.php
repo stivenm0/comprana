@@ -1,0 +1,1 @@
+<img src="{{asset('srcs/favicon.ico')}}" {{ $attributes }}/>
