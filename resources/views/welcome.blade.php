@@ -23,24 +23,23 @@
         </style>
     </head>
     <body class="antialiased bg-yellow-400 animate__animated animate__fadeIn bg-opacity-85">
-       
      
             @if (Route::has('login'))
-                <nav class="z-10 p-6 flex gap-2 text-right sm:fixed sm:top-0 sm:right-0">   
+                <nav class="z-10 flex gap-2 p-6 text-right sm:fixed sm:top-0 sm:right-0">   
                     @auth
                         <a href="{{ url('/dashboard') }}" class="relative">
-                            <span class="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-gray-700"></span>
-                            <span class="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-black px-3 py-1 text-base font-bold text-white transition duration-100 hover:bg-gray-900 hover:text-yellow-500 dark:bg-black">{{__('Dashboard')}}</span>
+                            <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-gray-700 rounded"></span>
+                            <span class="relative inline-block w-full h-full px-3 py-1 text-base font-bold text-white transition duration-100 bg-black border-2 border-black rounded fold-bold hover:bg-gray-900 hover:text-yellow-500 dark:bg-black">{{__('Dashboard')}}</span>
                         </a>
                     @else
                         <a href="{{ route('login') }}" class="relative ">
-                            <span class=" absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-gray-700"></span>
-                            <span class="fold-bold  relative inline-block h-full w-full rounded border-2 border-black bg-black px-3 py-1 text-base font-bold text-white transition duration-100 hover:bg-gray-900 hover:text-yellow-500 dark:bg-black">{{__('Login')}}</span>
+                            <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-gray-700 rounded "></span>
+                            <span class="relative inline-block w-full h-full px-3 py-1 text-base font-bold text-white transition duration-100 bg-black border-2 border-black rounded fold-bold hover:bg-gray-900 hover:text-yellow-500 dark:bg-black">{{__('Login')}}</span>
                         </a>
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}" class="relative">
-                                <span class="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-gray-700"></span>
-                                <span class="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-black px-3 py-1 text-base font-bold text-white transition duration-100 hover:bg-gray-900 hover:text-yellow-500 dark:bg-black">{{__('Register')}}</span>
+                                <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-gray-700 rounded"></span>
+                                <span class="relative inline-block w-full h-full px-3 py-1 text-base font-bold text-white transition duration-100 bg-black border-2 border-black rounded fold-bold hover:bg-gray-900 hover:text-yellow-500 dark:bg-black">{{__('Register')}}</span>
                             </a>
                         @endif
                     @endauth
