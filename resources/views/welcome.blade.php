@@ -24,8 +24,8 @@
     </head>
     <body class="antialiased bg-yellow-400 animate__animated animate__fadeIn bg-opacity-85">
      
-            @if (Route::has('login'))
-                <nav class="z-10 flex gap-2 p-6 text-right sm:fixed sm:top-0 sm:right-0">   
+            @if(Route::has('login'))
+                <nav class="z-10 flex flex-wrap gap-2 p-6 text-right sm:fixed sm:top-0 sm:right-0">   
                     @auth
                         <a href="{{ url('/dashboard') }}" class="relative">
                             <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-gray-700 rounded"></span>
@@ -46,6 +46,7 @@
                 </nav>
             @endif
 
+    {{-- header --}}
     <section class="flex flex-wrap ">
         <div class="w-full sm:w-8/12">
             <div class="container h-full mx-auto sm:p-10">
@@ -60,20 +61,24 @@
                         </h1>
                         <div class="w-20 h-2 my-4 bg-red-700"></div>
                         <p class="mb-10 text-xl">
-                            <span class="text-red-600 ">Supermercado</span> virtual colombiano lleno de productos frescos, ofertas
-                            exclusivas y conveniencia sin salir de casa. Explora nuestro extenso catálogo, elige entre
-                            una amplia gama de productos y disfruta de la facilidad de recibir tus compras directamente
-                            en tu
-                            puerta. Comprana, donde tus necesidades se encuentran con la modernidad del comercio en
-                            línea
+                            <span class="text-red-600 ">Supermercado</span> virtual colombiano lleno de productos frescos, ofertas exclusivas y sin salir de casa. Explora nuestro extenso catálogo, elige entre una amplia gama de productos y disfruta de la facilidad de recibir tus compras directamente en tu puerta.
                         </p>
+                        <a href="{{route('products.index')}}"
+                        class="flex flex-row items-center justify-center w-full px-4 py-4 mb-4 font-bold leading-6 text-yellow-500 capitalize duration-100 transform bg-red-700 rounded-sm shadow cursor-pointer text-md focus:ring-4 focus:ring-red-500 focus:ring-opacity-50 focus:outline-none sm:mb-0 sm:w-auto hover:shadow-lg hover:-translate-y-1 hover:animate-pulse">
+                        TIENDA
+                        <span class="ml-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F1C40F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 9v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9"/><path d="M9 22V12h6v10M2 10.6L12 2l10 8.6"/></svg>
+                        </span>
+                    </a>
                     </div>
                 </header>
             </div>
         </div>
-        <img src="{{asset('srcs/landing.jpeg')}}" alt="Leafs" class="object-cover w-full h-48 sm:h-screen sm:w-4/12">
+        <img src="{{asset('srcs/landing.jpeg')}}" alt="Leafs" class="absolute sm:relative  z-[-10] opacity-70 sm:opacity-100 object-cover w-full h-48 sm:h-screen sm:w-4/12">
     </section>
 
+
+    {{-- details --}}
     <section class="max-w-full p-5 mx-auto sm:p-10 md:p-16 bg-image ">
         <div class="grid grid-cols-1 gap-5 md:grid-cols-3 sm:grid-cols-2">
 
@@ -82,11 +87,12 @@
                 <div class="absolute top-0 bottom-0 left-0 right-0 mt-20 bg-gradient-to-b from-transparent to-gray-900">
                 </div>
                 <div class="absolute top-0 left-0 right-0 flex items-center justify-between mx-5 mt-2">
-                    <a href="#"
-                        class="px-5 py-2 text-xs text-white uppercase transition duration-500 ease-in-out bg-indigo-600 hover:bg-white hover:text-indigo-600">com</a>
+                    <a href="{{route('products.index', ['section'=> 'Bebidas'])}}"
+                        class="px-5 py-2 text-xs text-white uppercase transition duration-500 ease-in-out bg-indigo-600 hover:bg-white hover:text-indigo-600">Ver Más
+                    </a>
                 </div>
                 <main class="z-10 p-5">
-                    <p  class="font-medium leading-7 tracking-tight text-white text-md font-regular hover:underline">
+                    <p  class="font-medium leading-7 tracking-tight text-white text-md font-regular ">
                         Refresca tu día con nuestra selección de bebidas irresistibles. Desde jugos naturales hasta bebidas energéticas, Comprana tiene todo lo que necesitas para mantenerte hidratado y lleno de energía.
                     </p>
                 </main>
@@ -98,13 +104,14 @@
                 <div class="absolute top-0 bottom-0 left-0 right-0 mt-20 bg-gradient-to-b from-transparent to-gray-900">
                 </div>
                 <div class="absolute top-0 left-0 right-0 flex items-center justify-between mx-5 mt-2">
-                    <a href="#"
-                        class="px-5 py-2 text-xs text-white uppercase transition duration-500 ease-in-out bg-indigo-600 hover:bg-white hover:text-indigo-600">Politics</a>
+                    <a href="{{route('products.index', ['section'=> 'Frutas y Verduras'])}}"
+                        class="px-5 py-2 text-xs text-white uppercase transition duration-500 ease-in-out bg-indigo-600 hover:bg-white hover:text-indigo-600">Ver Más
+                    </a>
 
                 </div>
                 <main class="z-10 p-5">
                     <p href="#"
-                        class="font-medium leading-7 tracking-tight text-white text-md font-regular hover:underline">
+                        class="font-medium leading-7 tracking-tight text-white text-md font-regular">
                         Descubre la frescura y la calidad de nuestras verduras seleccionadas cuidadosamente. Comprana te brinda opciones saludables para cada comida.
                     </p>
                 </main>
@@ -115,12 +122,14 @@
                 <div class="absolute top-0 bottom-0 left-0 right-0 mt-20 bg-gradient-to-b from-transparent to-gray-900">
                 </div>
                 <div class="absolute top-0 left-0 right-0 flex items-center justify-between mx-5 mt-2">
-                    <a href="#"
-                        class="px-5 py-2 text-xs text-white uppercase transition duration-500 ease-in-out bg-indigo-600 hover:bg-white hover:text-indigo-600">Politics</a>
+                    <a href="{{route('products.index')}}"
+                        class="px-5 py-2 text-xs text-white uppercase transition duration-500 ease-in-out bg-indigo-600 hover:bg-white hover:text-indigo-600">Ver Más
+                    </a>
+
                 </div>
                 <main class="z-10 p-5">
                     <p 
-                        class="font-medium leading-7 tracking-tight text-white text-md font-regular hover:underline">
+                        class="font-medium leading-7 tracking-tight text-white text-md font-regular ">
                         Desde cereales hasta productos de limpieza, nuestra selección cuidadosa garantiza que tengas todo lo que necesitas, entregado directamente en tu puerta.
                     </p>
                 </main>
@@ -156,42 +165,8 @@
         </div>
     </section>
 
-    <footer class="w-full bg-gray-300">
-        <div class="justify-between max-w-screen-lg px-4 py-5 mx-auto text-gray-800 sm:px-6 sm:flex">
-            <div class="p-5 border-r sm:w-2/12">
-                <div class="text-sm font-bold text-indigo-600 uppercase">Menu</div>
-                <ul>
-                    <li class="my-2">
-                        <a class="hover:text-indigo-600" href="#">Home</a>
-                    </li>
-                    <li class="my-2">
-                        <a class="hover:text-indigo-600" href="#">Services</a>
-                    </li>
-                    <li class="my-2">
-                        <a class="hover:text-indigo-600" href="#">Products</a>
-                    </li>
-                    <li class="my-2">
-                        <a class="hover:text-indigo-600" href="#">Pricing</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="p-5 text-center border-r sm:w-7/12">
-                <h3 class="mb-4 text-xl font-bold text-red-600">Comprana</h3>
-                <p class="mb-10 text-sm text-gray-500">Tu destino digital de compras: calidad fresca, ofertas
-                    irresistibles y la comodidad de tenerlo todo a solo un clic de distancia.</p>
-            </div>
-            <div class="p-5 sm:w-3/12">
-                <div class="text-sm font-bold text-indigo-600 uppercase">Contact Us</div>
-                <ul>
-                    <li class="my-2">
-                        <a class="hover:text-indigo-600" href="#">XXX XXXX, Bogotá </a>
-                    </li>
-                    <li class="my-2 ">
-                        <a class="hover:text-indigo-600 text-wrap" href="#">@comprana.com</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </footer>
+    {{-- footer --}}
+    <x-commons.footer/>
+    
     </body>
 </html>

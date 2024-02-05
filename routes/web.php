@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,11 +16,9 @@ use Illuminate\Support\Facades\Storage;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::view('/', 'welcome');
 
-Route::get('/', function () {
-   
-    return view('welcome');
-});
+Route::get('/tienda', [ProductController::class, 'index'])->name('products.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -14,17 +14,20 @@ class SectionSeeder extends Seeder
     public function run(): void
     {
         $sections = [
-            ['name' => 'Alimentos Básicos'],
+            ['name' => 'Alimentos Empacados'],
             ['name' => 'Frutas y Verduras'],
-            ['name' => 'Carnes y Pescados'],
-            ['name' => 'Lácteos y Huevos'],
-            ['name' => 'Panadería y Repostería'],
+            ['name' => 'Frescos'],
+            ['name' => 'Refrigerados'],
+            ['name' => 'Congelados'],
             ['name' => 'Bebidas'],
-            ['name' => 'Snacks y Aperitivos'],
-            ['name' => 'Productos Congelados'],
-            ['name' => 'Cuidado Personal y Belleza'],
-            ['name' => 'Limpieza y Hogar'],
-            ['name' => 'Artículos para el Hogar'],
+            ['name' => 'Cuidado Personal'],
+            ['name' => 'Niños y Bebés'],
+            ['name' => 'Mascotas'],
+            ['name' => 'Suministros Escolares y Oficina'],
+            ['name' => 'Artículos de Limpieza'],
+            ['name' => 'Electrónica y Electrodomésticos'],
+            ['name' => 'Hogar y Decoración'],
+            ['name' => 'Productos de Belleza'],
         ];
 
         DB::table('sections')->insert($sections);
