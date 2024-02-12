@@ -1,20 +1,18 @@
 
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
-                <nav class="justify-end flex flex-wrap gap-2 p-2 text-right ">   
+    @guest        
+                <div class="justify-end flex flex-wrap gap-2 p-2 text-right ">   
                         <a href="{{ route('login') }}" class="relative ">
                             <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-gray-700 rounded "></span>
                             <span class="relative inline-block w-full h-full px-3 py-1 text-base font-bold text-white transition duration-100 bg-black border-2 border-black rounded fold-bold hover:bg-gray-900 hover:text-yellow-500 dark:bg-black">{{__('Login')}}</span>
                         </a>
                       
-                            <a href="{{ route('register') }}" class="relative">
-                                <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-gray-700 rounded"></span>
-                                <span class="relative inline-block w-full h-full px-3 py-1 text-base font-bold text-white transition duration-100 bg-black border-2 border-black rounded fold-bold hover:bg-gray-900 hover:text-yellow-500 dark:bg-black">{{__('Register')}}</span>
-                            </a>
-                       
-                   
-                </nav>
-           
-
+                        <a href="{{ route('register') }}" class="relative">
+                            <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-gray-700 rounded"></span>
+                            <span class="relative inline-block w-full h-full px-3 py-1 text-base font-bold text-white transition duration-100 bg-black border-2 border-black rounded fold-bold hover:bg-gray-900 hover:text-yellow-500 dark:bg-black">{{__('Register')}}</span>
+                        </a>
+                </div>
+    @endguest    
 
     @auth
         <!-- Primary Navigation Menu -->
@@ -23,15 +21,24 @@
                 <div class="flex">
                     <!-- Logo -->
                     <div class="shrink-0 flex items-center">
-                        <a href="{{ route('dashboard') }}">
+                        <a href="{{ route('products.index') }}">
                             <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                         </a>
                     </div>
 
                     <!-- Navigation Links -->
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            {{ __('Dashboard') }}
+                        <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.index')">
+                            🛍
+                            {{ __('Tienda') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('products.index')" :active="request()->routeIs('')">
+                            🛒
+                            {{ __('Carritos') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('products.index')" :active="request()->routeIs('')">
+                            🧾
+                            {{ __('Pedidos') }}
                         </x-nav-link>
                     </div>
                 </div>
@@ -85,8 +92,17 @@
         <!-- Responsive Navigation Menu -->
         <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
             <div class="pt-2 pb-3 space-y-1">
-                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                    {{ __('Dashboard') }}
+                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('products.index')">
+                    🛍
+                    {{ __('Tienda') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('')">
+                    🛒
+                    {{ __('Carritos') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('')">
+                    🧾
+                    {{ __('Pedidos') }}
                 </x-responsive-nav-link>
             </div>
 

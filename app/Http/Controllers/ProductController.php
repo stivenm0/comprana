@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Section;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Cache;
 
 class ProductController extends Controller
 {
@@ -12,19 +14,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $sections = Section::get('name');
+        $sections = Cache::remember('sections', Carbon::now()->addDay()->diffInSeconds(), function () {
+            return Section::get('name');
+        });   
         
         return view('products.index',[
             'sections'=> $sections
         ]);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
     }
 
 }

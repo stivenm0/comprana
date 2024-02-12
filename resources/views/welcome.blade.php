@@ -27,9 +27,9 @@
             @if(Route::has('login'))
                 <nav class="z-10 flex flex-wrap gap-2 p-6 text-right sm:fixed sm:top-0 sm:right-0">   
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="relative">
+                        <a href="{{ url('tienda') }}" class="relative">
                             <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-gray-700 rounded"></span>
-                            <span class="relative inline-block w-full h-full px-3 py-1 text-base font-bold text-white transition duration-100 bg-black border-2 border-black rounded fold-bold hover:bg-gray-900 hover:text-yellow-500 dark:bg-black">{{__('Dashboard')}}</span>
+                            <span class="relative inline-block w-full h-full px-3 py-1 text-base font-bold text-white transition duration-100 bg-black border-2 border-black rounded fold-bold hover:bg-gray-900 hover:text-yellow-500 dark:bg-black">{{__('Tienda')}}</span>
                         </a>
                     @else
                         <a href="{{ route('login') }}" class="relative ">

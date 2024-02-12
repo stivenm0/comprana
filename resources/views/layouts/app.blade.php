@@ -7,6 +7,8 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
+        <link rel="shortcut icon" href="{{asset('srcs/favicon.ico')}}" type="image/x-icon">
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -21,7 +23,7 @@
             <!-- Page Heading -->
             @if (isset($header))
                 <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
+                    <div class="px-4 py-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
                 </header>
@@ -32,5 +34,34 @@
                 {{ $slot }}
             </main>
         </div>
+
+
+         {{-- component  --}}
+    <div x-data="{open: false, timeout: null, message: ''}" 
+    x-on:notification.window=" 
+    open = true;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+        open = false;
+    }, 5000);
+    message = $event.detail
+    " 
+     x-show="open" x-transition.duration.300ms class="fixed z-50 px-4 py-2 text-white transition bg-green-500 rounded-md right-4 top-4 hover:bg-green-600">
+        <div class="flex items-center space-x-2">
+            <span class="text-3xl"><i class="bx bx-check"></i></span>
+            <p class="font-bold" x-text="message"></p>
+        </div>
+    </div>
+
+
+
+
+
+        
+
+
+
+
+
     </body>
 </html>
