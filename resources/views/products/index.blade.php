@@ -57,10 +57,6 @@
     </template>
 </div>
 
-
-
-
-
     <header class="bg-white">
         <div class="container px-6 py-4 mx-auto py">
             <nav  class="mt-2 sm:flex sm:justify-center sm:items-center">

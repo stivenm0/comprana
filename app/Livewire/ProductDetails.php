@@ -26,7 +26,7 @@ class ProductDetails extends Component
 
     public function order(string $product_id){
       if($this->count > 0 &&  $this->count <= $this->stock){
-        $cart = Cart::where('user_id', Auth::user()->id)->first();
+        $cart = Cart::where('user_id', Auth::user()->id)->where('active', true)->first();
         $cart->products()->attach($product_id, 
         [
           'cant'=> $this->count,

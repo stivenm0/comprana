@@ -27,7 +27,8 @@
             </p>
 
             {{-- add to cart --}}
-            <form wire:submit.prevent='order({{$product->id}})' x-data="{count: @entangle('count'), available: false }"
+            <form wire:submit.prevent='order({{$product->id}})' 
+                x-data="{count: @entangle('count'), available: false, total: 0 }"
                 class="mt-2" x-init=" 
                 $watch('count', value => available = value < 1 || value > $wire.stock ? false : true)"
                 @reset-count.window="count= 0">
@@ -51,6 +52,7 @@
                         </svg>
                     </button>
                 </div>
+                <p>total: <span x-text="total" ></span></p>
                 <button type="submit" :disabled="!available" @click="$dispatch('slider-close')"
                     :class="available ? 'hover:bg-indigo-500 ' :'bg-red-500 opacity-75 hover:cursor-not-allowed'"
                     class="px-8 py-2 mt-6 text-sm font-medium text-white bg-indigo-600 rounded focus:outline-none focus:bg-indigo-500">

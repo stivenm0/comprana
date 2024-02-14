@@ -37,7 +37,7 @@
 
 
          {{-- component  --}}
-    <div x-data="{open: false, timeout: null, message: ''}" 
+    <div x-cloak x-data="{open: false, timeout: null, message: ''}" 
     x-on:notification.window=" 
     open = true;
     clearTimeout(timeout);

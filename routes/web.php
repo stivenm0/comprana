@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Product;
@@ -20,9 +22,17 @@ Route::view('/', 'welcome');
 
 Route::get('/tienda', [ProductController::class, 'index'])->name('products.index');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/carritos', [CartController::class, 'index'])->name('carts.index');
+
+Route::get('/carritos/{id}', [CartController::class, 'show'])->name('carts.show');
+
+
+
+Route::get('/pedidos', [OrderController::class, 'index'])->name('orders.index');
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
