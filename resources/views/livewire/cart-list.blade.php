@@ -1,8 +1,8 @@
 <section x-data="{id: @entangle('id'), name: '', show: false}" @close-edit="show=false"
-    class="flex flex-wrap items-center justify-center gap-4 px-4 py-5 bg-gray-200 justify">
+    class="flex flex-wrap items-center justify-center gap-4 px-4 py-5 justify">
 
 
-    <form x-cloak x-show="show" wire:submit.prevent='edit_cart()' class="fixed z-50 w-1/3 p-5 mt-5 top-1/2 bg-slate-500">
+    <form x-cloak x-show="show" wire:submit.prevent='edit_cart()' class="fixed rounded-md z-50 md:w-1/3 p-5 mt-5 top-1/2 bg-slate-500">
         <div>
             <label for="user name" class="block text-sm text-gray-700 capitalize dark:text-gray-200">
                 Editar Nombre | <span x-text="name"></span> |
@@ -30,7 +30,7 @@
     {{---- Card---- --}}
     @foreach ($carts as $cart)
     <div class="flex flex-col items-center justify-center ">
-        <div class="p-4 bg-gray-100 rounded-lg shadow-lg min-w-64 {{$cart->active ? 'shadow-emerald-500': ''}}">
+        <div class="p-4 bg-gray-200 rounded-lg border shadow-lg min-w-64 {{$cart->active ? 'shadow-emerald-500  border-emerald-700': 'border-gray-400'}}">
             <div class="flex justify-between mb-2">
                 <div class="flex items-center">
                     <img src="{{asset('srcs/cart.webp')}}" alt="{{$cart->name}}" class="mr-4">
@@ -38,7 +38,8 @@
                         <h2 class="font-bold">{{$cart->name}} </h2>
                         {{-- active --}}
                         <div class="text-gray-700">
-                            <input type="checkbox" {{$cart->active === 0 ? '' : 'checked disabled'}}
+                            <input type="checkbox" {{$cart->active === 0 ? '' : 'checked disabled'}} 
+                            wire:loading.attr="disabled"
                             class="opacity-0 sr-only peer" id="{{$cart->name}}"
                             wire:click="active_cart('{{$cart->id}}')"
                             />

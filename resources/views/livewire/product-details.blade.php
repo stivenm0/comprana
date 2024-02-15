@@ -28,9 +28,11 @@
 
             {{-- add to cart --}}
             <form wire:submit.prevent='order({{$product->id}})' 
-                x-data="{count: @entangle('count'), available: false, total: 0 }"
+                x-data="{count: @entangle('count'), price: {{$product->price}}, available: false, total: 0 }"
                 class="mt-2" x-init=" 
-                $watch('count', value => available = value < 1 || value > $wire.stock ? false : true)"
+                $watch('count', value => {available = value < 1 || value > $wire.stock ? false : true
+                    total = count * price
+                })"
                 @reset-count.window="count= 0">
                 <label class="text-sm text-gray-700" for="count">Cantidad:
                     <span class="text-red-300" x-show="!available">Seleccione una cantidad</span>

@@ -19,10 +19,9 @@ class CartController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        $cart = Cart::find($id);
-        return view('carts.show', ['cart'=> $cart]);
+        return view('carts.show');
     }
 
 
