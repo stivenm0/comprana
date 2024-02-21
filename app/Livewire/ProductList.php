@@ -32,15 +32,14 @@ class ProductList extends Component
     }
 
 
-
-
     #[Computed()]
     public function products()  {
+        
         $query = Product::select('id','name','slug', 'price', 'stock', 'section_id')->search($this->search)
         ->with(['image:product_id,name']);
         
-
         if($this->search != ''){
+            $this->order = $this->order === 'asc' || $this->order === 'desc' ? $this->order : 'asc';
             $query->search($this->search)->orderBy('price', $this->order);
         }
 
@@ -52,9 +51,7 @@ class ProductList extends Component
             });
         }
 
-       
-        
-        return $query->paginate(6);
+        return $query->paginate(12);
     }
 
     public function render()

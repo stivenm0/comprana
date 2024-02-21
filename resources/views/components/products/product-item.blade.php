@@ -2,7 +2,7 @@
     $in_stock = $product->stock > 0 ? true : false
 @endphp
 
-<div class="w-full max-w-sm mx-auto overflow-hidden rounded-md shadow-md lg:my-1">
+<div class="{{!$in_stock ? 'shadow-md shadow-red-500' :''}} w-full max-w-sm mx-auto overflow-hidden rounded-md shadow-md lg:my-1">
     <div   class="flex items-end justify-end w-full h-56 bg-cover" style="background-image: url('{{asset('storage/images/'.$product->image->name)}}')">
         @if ($in_stock)
         @guest
@@ -21,10 +21,7 @@
             </button>
         @endauth
         @endif
-     
-
-
-
+    
     </div>
     <div class="px-5 py-3">
         @include('products.partials.section-badge')

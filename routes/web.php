@@ -22,22 +22,17 @@ Route::view('/', 'welcome');
 
 Route::get('/tienda', [ProductController::class, 'index'])->name('products.index');
 
-Route::get('/carritos', [CartController::class, 'index'])->name('carts.index');
-
-Route::get('/carritos/{id}', [CartController::class, 'show'])->name('carts.show');
-
-
-
-Route::get('/pedidos', [OrderController::class, 'index'])->name('orders.index');
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+    Route::get('/carritos', [CartController::class, 'index'])->name('carts.index');
+    Route::get('/carritos/{id}', [CartController::class, 'show'])->name('carts.show');
+
+    Route::get('/pedidos', [OrderController::class, 'index'])->name('orders.index');
+
 });
 
 require __DIR__.'/auth.php';

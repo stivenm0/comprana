@@ -27,11 +27,12 @@ class ProductDetails extends Component
     public function order(string $product_id){
       if($this->count > 0 &&  $this->count <= $this->stock){
         $cart = Cart::where('user_id', Auth::user()->id)->where('active', true)->first();
-        $cart->products()->attach($product_id, 
-        [
+        $cart->products()->syncWithoutDetaching([
+          $product_id => [
           'cant'=> $this->count,
           'sum'=> $this->count * $this->product->price
-        ]);
+        ]
+      ]);
       }
         $this->dispatch('notification', 
         "Se agrego {$this->count} de {$this->product->name} a tu carrito");
