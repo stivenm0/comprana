@@ -1,8 +1,8 @@
-<section x-data="{id: @entangle('id'), name: '', show: false}" @close-edit="show=false"
+<section x-data="{id: @entangle('cart_id'), name: '', show: false}" @close-edit="show=false"
     class="flex flex-wrap items-center justify-center gap-4 px-4 py-5 justify">
 
 
-    <form x-cloak x-show="show" wire:submit.prevent='edit_cart()' class="fixed rounded-md z-50 md:w-1/3 p-5 mt-5 top-1/2 bg-slate-500">
+    <form x-cloak x-show="show" wire:submit.prevent='edit_cart()' class="fixed z-50 p-5 mt-5 rounded-md md:w-1/3 top-1/2 bg-slate-500">
         <div>
             <label for="user name" class="block text-sm text-gray-700 capitalize dark:text-gray-200">
                 Editar Nombre | <span x-text="name"></span> |
@@ -25,7 +25,6 @@
             </button>
         </div>
     </form>
-
 
     {{---- Card---- --}}
     @foreach ($carts as $cart)
@@ -71,7 +70,7 @@
             </div>
             <hr class="my-3">
             <div class="flex justify-center mt-4">
-                <a href="{{route('carts.show', ['id'=> $cart->id])}}" wire:navigate
+                <a href="{{route('carts.show', ['cart'=> $cart->id])}}" wire:navigate
                     class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
                     Mirar Carrito
                 </a>

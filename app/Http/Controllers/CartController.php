@@ -19,9 +19,13 @@ class CartController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(Cart $cart)
     {
-        return view('carts.show');
+        $this->authorize('author', $cart);
+
+        return view('carts.show', [
+            'cart' => $cart
+        ]);
     }
 
 

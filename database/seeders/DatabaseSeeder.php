@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
 
         // $this->call(SectionSeeder::class);
 
-        Product::factory(10)
+        Product::factory(20)
         ->has(Image::factory()->count(3))
         ->create();
 

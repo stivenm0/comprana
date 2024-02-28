@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\On;
+use Livewire\Attributes\Reactive;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 
@@ -14,26 +16,23 @@ class CartProductsList extends Component
 {
 
     public $cart;
-
-    public $id;
-
-    public function delete(string $id) {
-        $this->cart->products()->detach($id);
-        // dd($this->cart->products);
-        // DB::table('cart_product')->where('product_id', $id)->where('cart_id', $this->cart->id)->delete(); 
-        $this->dispatch('notification', 'Se Elimino el producto');
+    
+    public function placeholder()
+    {
+        return <<<'HTML'
+        <div class="flex items-center justify-center my-40 space-x-2">
+            <div class="w-4 h-4 rounded-full animate-pulse dark:bg-violet-400"></div>
+            <div class="w-4 h-4 rounded-full animate-pulse dark:bg-violet-400"></div>
+            <div class="w-4 h-4 rounded-full animate-pulse dark:bg-violet-400"></div>
+        </div>
+        HTML;
     }
+ 
 
+    #[On('refresh')]
     public function render()
     {
-        try{
-        $this->cart = Cart::where('user_id', Auth::user()->id)->with(['products'=> function ($query){
-            $query->with('image');
-        }])->findOrFail($this->id);
-        
-        }catch(ModelNotFoundException $exception){
-            abort(404);
-        }
+        $this->cart->products()->with('image')->get(); 
         return view('livewire.cart-products-list');
     }
 }

@@ -14,13 +14,15 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->unsignedBigInteger('dispatcher')->nullable();
+            $table->unsignedBigInteger('dispatcher_id')->nullable();
             $table->foreignId('cart_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->enum('status', ['Pendiente de Pago', 'Procesando', 'Enviado', 'Entregado', 'No Entregado', 'Cancelado'])->default('Pendiente de Pago');
+            $table->enum('status', ['Procesando', 'En Camino', 'Entregado', 'No Entregado', 'Cancelado'])->default('Procesando');
+            $table->decimal('total');
+            $table->string('invoice');
             $table->string('address');
             $table->string('phone', 10);
 
-            $table->foreign('dispatcher')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('dispatcher_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

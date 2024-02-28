@@ -38,9 +38,9 @@
 
     {{-- -----products----- --}}
     @if ($this->products->count())
-    <div class="grid grid-cols-1 gap-6 my-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div class="grid grid-cols-1 gap-6 my-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
         @foreach ($this->products as $product)
-        <x-products.product-item :$product wire:key='{{$product->id}}' />
+        <x-products.product-item :$product wire:key='{{$product->id}}'/>
         @endforeach
     </div>
     @else

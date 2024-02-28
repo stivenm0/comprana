@@ -6,7 +6,6 @@
     </x-slot>
 
     <x-commons.info-list title="Información de Carritos" :list="[
-      //  'Puede cancelar el pedido 30 minutos despues de hacer.',
        'Procesando: El pedido se está alistando para ser enviado.',
        'En Camino: El pedido ha sido enviado y está en camino a su destino.',
        'Entregado: El pedido ha sido entregado en el destino.',
@@ -32,7 +31,7 @@
             <li class="px-2 py-1 md:text-lg relative bg-gray-200 rounded-lg select-none hover:shadow hover:shadow-teal-500 hover:outline hover:outline-teal-600 hover:cursor-pointer
             {{request('status') === 'Enviado' ? 'outline outline-teal-600': '' }}
             ">
-                <a href="{{route('orders.index', ['status'=> 'Enviado'])}}" wire:navigate>
+                <a href="{{route('orders.index', ['status'=> 'En Camino'])}}" wire:navigate>
                     En Camino
                 </a>
             </li>

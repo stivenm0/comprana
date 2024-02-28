@@ -13,7 +13,8 @@ class ProductDetails extends Component
 
     public ?Product $product;
     public $stock = 0;
-    public $count = 0;
+    public $price = 0;
+    public $count = 1;
 
 
     #[On('details')]
@@ -21,6 +22,7 @@ class ProductDetails extends Component
       $this->product =  Product::select('id','name', 'description', 'stock', 'price')
       ->where('id', $id)->with('images')->first();
       $this->stock = $this->product->stock;
+      $this->price = $this->product->price;
     }
     
 
@@ -29,8 +31,7 @@ class ProductDetails extends Component
         $cart = Cart::where('user_id', Auth::user()->id)->where('active', true)->first();
         $cart->products()->syncWithoutDetaching([
           $product_id => [
-          'cant'=> $this->count,
-          'sum'=> $this->count * $this->product->price
+          'cant'=> $this->count
         ]
       ]);
       }

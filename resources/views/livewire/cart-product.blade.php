@@ -7,8 +7,8 @@
   <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between">
     <div class="mt-5 sm:mt-0">
       <h2 class="text-lg font-bold text-gray-900">{{$product->name}}</h2>
-      <p class="mt-1 text-xs text-gray-700">{{$product->price}}</p>
-      <p class="mt-1 text-xs text-gray-700">{{$product->stock}}</p>
+      <p class="mt-1 text-xs text-gray-700">Precio: {{$product->price}}</p>
+      <p class="mt-1 text-xs text-gray-700">Stock: {{$product->stock}}</p>
     </div>
     <div class="flex justify-between mt-4 sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
       <div class="flex items-center border-gray-100">
@@ -20,7 +20,7 @@
         <span class="flex items-center justify-center w-8 h-8 text-xs bg-white border outline-none"
           x-text="cant"></span>
         <span @click=" pay += price
-            cant = cant >= $wire.stock ? cant :  parseInt(cant) +1"
+            cant = cant >= {{$product->stock}} ? cant :  parseInt(cant) +1"
           class="px-3 py-1 duration-100 bg-gray-100 rounded-r cursor-pointer hover:bg-blue-500 hover:text-blue-50">
           + </span>
       </div>
@@ -31,7 +31,7 @@
           wire:click='edit()'>actualizar </button>
         <button  @click="
           if(confirm('¿Seguro desea eliminar {{$product->name}} de su carrito?')){
-            $wire.$parent.delete({{$product->id}})
+            $wire.delete()
             pay -= total
           }"
           class="w-full py-1 font-medium duration-150 bg-red-500 rounded-md cursor-pointer text-blue-50 hover:bg-red-600 ">

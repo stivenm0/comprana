@@ -7,7 +7,7 @@ class="pt-5 bg-gray-100 ">
       <div class="justify-center max-w-5xl px-6 mx-auto md:flex md:space-x-6 xl:px-0">
         <div class="rounded-lg md:w-2/3">
           @foreach ($cart->products as $product)
-          <livewire:cart-product :key='$product->id' :$product>
+          <livewire:cart-product :key='$product->id' :$product :cant="$product->pivot->cant" :$cart >
           @endforeach
         </div>
         
@@ -25,10 +25,10 @@ class="pt-5 bg-gray-100 ">
               <p class="text-sm text-green-500">Incluye el envío.</p>
             </div>
           </div>
-          <button 
-           class="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">
+          <a href="{{route('orders.create', ['id'=> $cart->id])}}"
+           class="block text-center mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">
            Comprar
-          </button>
+        </a>
         </div>
       </div>
 

@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('cart_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->unsignedInteger('cant');
-            $table->decimal('sum', 10,2)->nullable();
             $table->timestamps();
         });
     }

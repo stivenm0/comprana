@@ -18,10 +18,8 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-        $name = fake()->unique()->sentence(3);
         return [
-            'name' => $name, 
-            'slug' => Str::slug($name),
+            'name' => fake()->sentence(3), 
             'description'=> fake()->paragraph(),
             'price'=> rand(1000, 100000),
             'stock'=> rand(100, 1000),

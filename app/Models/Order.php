@@ -27,7 +27,7 @@ class Order extends Model
      */
     public function dispatcher(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'dispatcher', 'id');
+        return $this->belongsTo(User::class, 'dispatcher_id', 'id');
     }
 
     /**

@@ -66,7 +66,7 @@
     </header>
 
 
-    <livewire:Product-list/> 
+    <livewire:Product-list lazy/> 
 
     <x-commons.footer/>
 

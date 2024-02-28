@@ -61,7 +61,7 @@
                         </h1>
                         <div class="w-20 h-2 my-4 bg-red-700"></div>
                         <p class="mb-10 text-xl">
-                            <span class="text-red-600 ">Supermercado</span> virtual colombiano lleno de productos frescos, ofertas exclusivas y sin salir de casa. Explora nuestro extenso catálogo, elige entre una amplia gama de productos y disfruta de la facilidad de recibir tus compras directamente en tu puerta.
+                            <span class="text-red-600 ">Supermercado</span> virtual lleno de productos frescos, ofertas exclusivas y sin salir de casa. Explora nuestro extenso catálogo, elige entre una amplia gama de productos y disfruta de la facilidad de recibir tus compras directamente en tu puerta.
                         </p>
                         <a href="{{route('products.index')}}"
                         class="flex flex-row items-center justify-center w-full px-4 py-4 mb-4 font-bold leading-6 text-yellow-500 capitalize duration-100 transform bg-red-700 rounded-sm shadow cursor-pointer text-md focus:ring-4 focus:ring-red-500 focus:ring-opacity-50 focus:outline-none sm:mb-0 sm:w-auto hover:shadow-lg hover:-translate-y-1 hover:animate-pulse">

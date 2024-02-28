@@ -31,11 +31,21 @@ class ProductList extends Component
         $this->resetPage();
     }
 
+    public function placeholder()
+    {
+        return <<<'HTML'
+        <div class="flex my-40 items-center justify-center space-x-2">
+            <div class="w-4 h-4 rounded-full animate-pulse dark:bg-violet-400"></div>
+            <div class="w-4 h-4 rounded-full animate-pulse dark:bg-violet-400"></div>
+            <div class="w-4 h-4 rounded-full animate-pulse dark:bg-violet-400"></div>
+        </div>
+        HTML;
+    }
+
 
     #[Computed()]
     public function products()  {
-        
-        $query = Product::select('id','name','slug', 'price', 'stock', 'section_id')->search($this->search)
+        $query = Product::select('id','name', 'price', 'stock', 'section_id')->search($this->search)
         ->with(['image:product_id,name']);
         
         if($this->search != ''){

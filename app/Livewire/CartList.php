@@ -16,35 +16,40 @@ class CartList extends Component
 
     public $user_id;
 
-    #[Validate('required|min:4|max:15|unique:carts')] 
+    public $cart_id = '';
+
+    #[Validate('required|min:2|max:25|unique:carts')] 
     public $name = '';
 
-    public $id = '';
+    public function mount(){
+        $this->user_id = Auth::user()->id;
+    }
 
-    public function active_cart(string $id) {
+    public function active_cart(string $cart_id) {
         Cart::where('active', true)->where('user_id', $this->user_id)->update(['active'=> false]);
-
-        Cart::where('id', $id)->where('user_id', $this->user_id)->update(['active'=> true]);
+        Cart::where('id', $cart_id)->where('user_id', $this->user_id)->update(['active'=> true]);
     }
 
 
-    public function void_cart(string $id){
-        DB::table('cart_product')->where('cart_id', $id)->delete();
-        $this->dispatch('notification', 'Se vació el carrito Correctamente');
+    public function void_cart(string $cart_id){
+        $cart = Cart::find($cart_id);
+        $this->authorize('author', $cart);
+        $cart->products()->detach();
+        $this->dispatch('notification', 'Se vació el carrito');
     }
 
     public function edit_cart(){
         $this->validate();
-        Cart::where('id', $this->id)->where('user_id', $this->user_id)->update(['name'=> $this->name]);
+        Cart::where('id', $this->cart_id)->update(['name'=> $this->name]);
+
         $this->dispatch('notification', 'Se edito el carrito');
         $this->dispatch('close-edit');
-        $this->reset();
+        $this->reset('name');
     }
 
 
     public function render()
     {
-        $this->user_id = Auth::user()->id;
         $this->carts = Cart::where('user_id', $this->user_id)->withCount('products')
         ->orderBy('active', 'desc')->get();
         return view('livewire.cart-list');

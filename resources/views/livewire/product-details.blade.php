@@ -28,12 +28,12 @@
 
             {{-- add to cart --}}
             <form wire:submit.prevent='order({{$product->id}})' 
-                x-data="{count: @entangle('count'), price: {{$product->price}}, available: false, total: 0 }"
+                x-data="{count: @entangle('count'), price: @entangle('price'), available: true }"
                 class="mt-2" x-init=" 
-                $watch('count', value => {available = value < 1 || value > $wire.stock ? false : true
-                    total = count * price
+                $watch('count', value => {
+                    available = value < 1 || value > $wire.stock ? false : true
                 })"
-                @reset-count.window="count= 0">
+                @reset-count.window="count= 1">
                 <label class="text-sm text-gray-700" for="count">Cantidad:
                     <span class="text-red-300" x-show="!available">Seleccione una cantidad</span>
                 </label>
@@ -45,8 +45,8 @@
                             <path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                     </button>
-                    <input type="number" x-model="count" class="block w-24 text-sm text-gray-700">
-                    <button type="button" @click="count = count >= $wire.stock ? count :  parseInt(count) +1"
+                    <span type="number" x-text="count" class="block w-24 text-sm text-gray-700"></span>
+                    <button type="button" @click="count = count >= $wire.stock ? count :  parseInt(count) + 1"
                         class="text-gray-500 focus:outline-none focus:text-gray-600">
                         <svg class="w-5 h-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             viewBox="0 0 24 24" stroke="currentColor">
@@ -54,7 +54,7 @@
                         </svg>
                     </button>
                 </div>
-                <p>total: <span x-text="total" ></span></p>
+                <p>total: <span x-text="price * count" ></span></p>
                 <button type="submit" :disabled="!available" @click="$dispatch('slider-close')"
                     :class="available ? 'hover:bg-indigo-500 ' :'bg-red-500 opacity-75 hover:cursor-not-allowed'"
                     class="px-8 py-2 mt-6 text-sm font-medium text-white bg-indigo-600 rounded focus:outline-none focus:bg-indigo-500">
