@@ -11,6 +11,7 @@
                 </button>
             </div>
 
+            {{-- left  --}}
             @switch($step)
                 @case(1)
                     <form class="my-8 lg:w-3/4" wire:submit.prevent='contacts'>
@@ -50,32 +51,60 @@
                 @break
 
                 @case(2)
-                    <ul class="bg-white shadow overflow-hidden sm:rounded-md max-w-sm mx-auto mt-16">
-                        @foreach ($products as $product)
-                        @php
-                            $total += $product->price;
-                        @endphp
-                            <li>
-                                <div class="px-4 py-5 sm:px-6">
-                                    <div class="flex items-center justify-between">
-                                        <h3 class="text-lg leading-6 font-medium text-gray-900">{{$product->name}}</h3>
-                                        <p class="mt-1 max-w-2xl text-sm text-gray-500">{{$product->price}}</p>
-                                    </div>
-                                    <div class="mt-4 flex items-center justify-between">
-                                        <p class="text-sm font-medium text-gray-500">cantidad:  <span
-                                                class="text-green-600">{{$product->pivot->cant}}</span></p>
-                                        <span class="font-medium text-indigo-600 hover:text-indigo-500">
-                                            {{$product->pivot->cant * $product->price}}
-                                        </span>
-                                    </div>
+                    <div class="flex flex-col my-5">
+                        <div class="overflow-x-auto ">
+                            <div class="py-2 inline-block min-w-full sm:px-1 lg:px-2">
+                                <div class="overflow-hidden">
+                                    <table class="min-w-full">
+                                        <thead class="bg-white border-b">
+                                            <tr>
+                                                <th scope="col"
+                                                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                    Nombre
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                    Precio
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                    Cantidad
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                    Total
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($products as $product)
+                                                @php
+                                                    $total += $product->price;
+                                                @endphp
+                                                <tr class="bg-gray-100 border-b">
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                        {{ $product->name }}
+                                                    </td>
+                                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                        {{ $product->price }}
+                                                    </td>
+                                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                        {{ $product->pivot->cant }}
+                                                    </td>
+                                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                        {{ $product->pivot->cant * $product->price }}
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
-                            </li>
-                        @endforeach
-                    </ul>
+                            </div>
+                        </div>
+                    </div>
 
-                    <strong>{{$total}}</strong>
 
-                    <button
+                    <button wire:click='back()'
                         class="flex items-center text-sm font-medium text-gray-700 rounded hover:underline focus:outline-none">
                         <svg class="w-5 h-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             viewBox="0 0 24 24" stroke="currentColor">
@@ -84,34 +113,29 @@
                         <span class="mx-2">Volver</span>
                     </button>
                 @break
-
-                @default
             @endswitch
-
-
         </div>
 
-        <div class="flex-shrink-0 order-1 w-full mb-8 lg:w-1/2 lg:mb-0 lg:order-2">
-            <img src="{{asset('srcs/DALL·E 2024-02-28 15.36.51 - informacion de contacto estilo supermercado.png')}}" alt="contactos">
+        {{-- Right  --}}
+        <div class="flex-shrink-0 order-1  w-full mb-8 lg:w-1/2 lg:mb-0 lg:order-2">
+            @if ($step === 1)
+                <img src="{{ asset('srcs/DALL·E 2024-02-28 15.36.51 - informacion de contacto estilo supermercado.png') }}" alt="contactos" class="w-1/2 mx-auto rounded-md">
 
-            <div class="flex justify-center lg:justify-end">
-                <div class="w-full max-w-md px-4 py-3 border rounded-md">
-                    <div class="flex items-center justify-between">
-                        <h3 class="font-medium text-gray-700">Order total (2)</h3>
-                    </div>
-                    <div class="flex justify-between mt-6">
-                        <div class="flex">
-                            <div class="mx-3">
-                                <h3 class="text-sm text-gray-600">Mac Book Pro</h3>
-                                <div class="flex items-center mt-2">
-                                    <span class="mx-2 text-gray-700">2</span>
-                                </div>
-                            </div>
+            @elseif($step === 2)
+                <div class="flex justify-center lg:justify-end">
+                    <div class="w-full max-w-md px-4 py-3 border bg-white rounded-md">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-medium text-gray-700">Total a Pagar: $ {{$total}}</h3>
                         </div>
-                        <span class="text-gray-600">20$</span>
+                        <button class="bg-blue-800 text-white w-full mt-6 rounded-md py-1">
+                            Pagar
+                        </button>
                     </div>
                 </div>
-            </div>
+            @endif
+
+
+
         </div>
 
     </div>

@@ -37,6 +37,10 @@ class Order extends Component
         $this->step= 2;
     }
 
+    public function back(){
+        $this->step = 1;
+    }
+
 
 
 
