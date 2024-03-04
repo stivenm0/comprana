@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone', 10)->nullable();
             $table->string('address')->nullable();
-            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });

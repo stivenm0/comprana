@@ -12,7 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable;
     /**
      * The attributes that are mass assignable.
      *
@@ -46,15 +46,17 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    const ROLE_ADMIN = 'ADMIN';
-    const ROLE_EDITOR = 'EDITOR';
-    const ROLE_USER = 'USER';
+    const ROLE_ADMIN = 'ADMINISTRADOR';
+    const ROLE_EDITOR = 'GESTOR';
+    const ROLE_DISPATCHER = 'DESPACHADOR';
+    const ROLE_USER = 'USUARIO';
     const ROLE_DEFAULT = self::ROLE_USER;
 
     const ROLES = [
-        self::ROLE_ADMIN => 'Admin',
-        self::ROLE_EDITOR => 'Editor',
-        self::ROLE_USER => 'User',
+        self::ROLE_ADMIN => 'Administrador',
+        self::ROLE_EDITOR => 'Gestor',
+        self::ROLE_DISPATCHER => 'Despachador',
+        self::ROLE_USER => 'Usuario',
     ];
 
 
