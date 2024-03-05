@@ -12,7 +12,18 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'description',
+        'price',
+        'stock',
+        'section_id'
+    ];
 
+
+    // protected $casts = [
+    //     'images' => 'array',
+    // ];
     /**
      * Get the section that owns the Product
      *

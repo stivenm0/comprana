@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Filament\Resources\ProductResource\Pages;
+
+use App\Filament\Resources\ProductResource;
+use Filament\Actions;
+use Filament\Resources\Pages\ListRecords;
+
+class ListProducts extends ListRecords
+{
+    protected static string $resource = ProductResource::class;
+
+    protected ?string $heading = 'Productos';
+
+    protected static ?string $title = 'Productos';
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\CreateAction::make()
+            ->label('Crear Producto'),
+        ];
+    }
+}

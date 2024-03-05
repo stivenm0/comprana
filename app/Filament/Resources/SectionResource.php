@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\SectionResource\Pages;
 use App\Filament\Resources\SectionResource\RelationManagers;
+use App\Filament\Resources\SectionResource\RelationManagers\ProductsRelationManager;
 use App\Models\Section;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -18,10 +19,11 @@ class SectionResource extends Resource
 {
     protected static ?string $model = Section::class;
 
-
     protected static ?string $navigationLabel = 'Secciones';
 
-    protected static ?string $navigationIcon = 'heroicon-o-bookmark';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+
 
     public static function form(Form $form): Form
     {
@@ -29,12 +31,9 @@ class SectionResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->label('Nombre')
-                    ->unique()
                     ->required()
-                    ->maxLength(100)
-                    // ->columnSpan(2)
-                    ,
-            ])->columns(1);
+                    ->maxLength(100),
+            ]);
     }
 
     public static function table(Table $table): Table
@@ -45,10 +44,11 @@ class SectionResource extends Resource
                     ->label('Nombre')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('products_count')
+              ->label('Productos')
                     ->counts('products')
-                    ->label('productos')
                     ->alignCenter(),
             ])
+            
             ->filters([
                 //
             ])
@@ -65,10 +65,19 @@ class SectionResource extends Resource
             ]);
     }
 
+    public static function getRelations(): array
+    {
+        return [
+            ProductsRelationManager::class
+        ];
+    }
+
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageSections::route('/'),
+            'index' => Pages\ListSections::route('/'),
+            'create' => Pages\CreateSection::route('/create'),
+            'edit' => Pages\EditSection::route('/{record}/edit'),
         ];
     }
 }

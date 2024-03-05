@@ -4,21 +4,18 @@ namespace App\Filament\Resources\SectionResource\Pages;
 
 use App\Filament\Resources\SectionResource;
 use Filament\Actions;
-use Filament\Resources\Pages\ManageRecords;
+use Filament\Resources\Pages\EditRecord;
 
-class ManageSections extends ManageRecords
+class EditSection extends EditRecord
 {
     protected static string $resource = SectionResource::class;
 
-    protected static ?string $title = 'Secciones';
-
-    protected ?string $heading = 'Secciones';
-
+    protected ?string $heading = 'Editar Sección';
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->label('Crear Sección'),
+            Actions\DeleteAction::make(),
         ];
     }
 }

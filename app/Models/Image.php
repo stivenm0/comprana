@@ -10,6 +10,13 @@ class Image extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'product_id',
+        'name',
+    ];
+
+    
+
     public $timestamps = false;
 
     /**
