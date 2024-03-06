@@ -91,7 +91,7 @@ class ProductResource extends Resource
                         }
                     })
                     ->maxFiles(3)
-                    ->required()->hidden('edit'),
+                    ->required()->hiddenOn('edit'),
             ]);
     }
 

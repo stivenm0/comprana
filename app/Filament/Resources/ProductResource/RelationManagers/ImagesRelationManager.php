@@ -30,8 +30,7 @@ class ImagesRelationManager extends RelationManager
                 ->reorderable()
                 ->preserveFilenames()
                 ->maxFiles(1)
-                ->required()
-                ->hidden(fn ():bool => $this->ownerRecord->images()->count() > 3 ),
+                ->required(),
             ]);
     }
 
@@ -51,14 +50,13 @@ class ImagesRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make()
                 ->label('Agregar Imagen')
-                ->using(function (array $data) {
-
-                return $this->ownerRecord->images()->create([
-                        'name'=> $data['name']
-                      ]);
-                
+                ->using(function (array $data, string $model): Model {
+                        return $model::create([
+                                'product_id'=> $this->ownerRecord->id,
+                                'name'=> $data['name']
+                        ]);
                 })
-                ->hidden(fn ():bool => $this->ownerRecord->images()->count() > 3 ),
+                ->hidden(fn ():bool => $this->ownerRecord->images()->count() >= 3 ),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

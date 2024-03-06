@@ -19,6 +19,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'role',
         'name',
         'phone',
         'address',
@@ -79,6 +80,18 @@ class User extends Authenticatable
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function isAdmin() : bool { 
+        return $this->role === self::ROLE_ADMIN;
+    }
+
+    public function isEditor() : bool { 
+        return $this->role === self::ROLE_EDITOR;
+    }
+
+    public function isDispatcher() : bool { 
+        return $this->role === self::ROLE_DISPATCHER;
     }
 
 }

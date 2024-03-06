@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
+use App\Filament\Resources\UserResource\Pages\CreateUser;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
@@ -30,21 +31,22 @@ class UserResource extends Resource
                     ->label('Rol')
                     ->options(User::ROLES)
                     ->required()
-                    ->default('USUARIO'),
+                    ->default(User::ROLE_DEFAULT),
                 Forms\Components\TextInput::make('name')
                     ->label('Nombre')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('email')
                     ->label('Correo')
+                    ->unique(ignoreRecord: true)
                     ->email()
                     ->required()
                     ->maxLength(255),
-                // Forms\Components\DateTimePicker::make('email_verified_at'),
                 Forms\Components\TextInput::make('password')
                 ->label('Contraseña')
-                    ->hidden('edit')
+                    ->visible(fn ($livewire)=> $livewire instanceof CreateUser )
                     ->password()
+                    ->revealable()
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('phone')
@@ -63,6 +65,14 @@ class UserResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('role')
                     ->label('Rol')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'ADMINISTRADOR' => 'gray',
+                        'DESPACHADOR' => 'warning',
+                        'GESTOR' => 'success',
+                        'USUARIO' => 'danger',
+                    })
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nombre')
@@ -80,7 +90,8 @@ class UserResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('address')
                     ->label('Dirección')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Creación')
                     ->dateTime()
@@ -98,14 +109,17 @@ class UserResource extends Resource
             ->actions([
                 ActionGroup::make([
                     Tables\Actions\EditAction::make(),
-                    Tables\Actions\DeleteAction::make(),
+                    Tables\Actions\DeleteAction::make()
+                    ->hidden(fn (User $record): bool => $record->isAdmin()),
                 ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])->checkIfRecordIsSelectableUsing(
+                    fn (User $record): bool => !$record->isAdmin(),
+            );
     }
 
     public static function getRelations(): array

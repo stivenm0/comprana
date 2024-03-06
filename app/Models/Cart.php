@@ -11,6 +11,7 @@ class Cart extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
 
     /**
      * Get the user that owns the Cart
