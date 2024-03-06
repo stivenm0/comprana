@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
+use App\Filament\Resources\ProductResource\RelationManagers\ImagesRelationManager;
 use App\Models\Image;
 use App\Models\Product;
 use Filament\Forms;
@@ -15,8 +16,6 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-
- 
 use Filament\Infolists;
 use Filament\Infolists\Infolist;
 
@@ -26,13 +25,13 @@ class ProductResource extends Resource
 
     protected static ?string $navigationLabel = 'Productos';
 
-    protected static ?string $navigationIcon = 'heroicon-o-building-storefront';
 
+    protected static ?string $navigationIcon = 'heroicon-o-building-storefront';
    
  
-public static function infolist(Infolist $infolist): Infolist
-{
-    return $infolist
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
         ->schema([
             Infolists\Components\TextEntry::make('section.name')
                 ->label('Sección'),
@@ -49,7 +48,7 @@ public static function infolist(Infolist $infolist): Infolist
                 ->label('imágenes')
                 ->columnSpanFull(),
         ]);
-}
+    }
 
     public static function form(Form $form): Form
     {
@@ -92,7 +91,7 @@ public static function infolist(Infolist $infolist): Infolist
                         }
                     })
                     ->maxFiles(3)
-                    ->required(),
+                    ->required()->hidden('edit'),
             ]);
     }
 
@@ -112,8 +111,9 @@ public static function infolist(Infolist $infolist): Infolist
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('price')
+                    ->prefix('$')
+                    ->numeric()
                     ->label('Precio')
-                    ->money()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Creación')
@@ -146,7 +146,7 @@ public static function infolist(Infolist $infolist): Infolist
     public static function getRelations(): array
     {
         return [
-            //
+            ImagesRelationManager::class
         ];
     }
 

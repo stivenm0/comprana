@@ -21,9 +21,10 @@ class Product extends Model
     ];
 
 
-    // protected $casts = [
-    //     'images' => 'array',
-    // ];
+    protected $casts = [
+        'price' => 'int',
+        // 'images' => 'array',
+    ];
     /**
      * Get the section that owns the Product
      *

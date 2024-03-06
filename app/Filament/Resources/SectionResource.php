@@ -19,6 +19,7 @@ class SectionResource extends Resource
 {
     protected static ?string $model = Section::class;
 
+
     protected static ?string $navigationLabel = 'Secciones';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
