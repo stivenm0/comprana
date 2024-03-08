@@ -41,6 +41,10 @@ class Order extends Component
         $this->step = 1;
     }
 
+    public function pay(){
+        
+    }
+
 
 
 

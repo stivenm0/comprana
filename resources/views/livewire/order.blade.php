@@ -127,7 +127,7 @@
                         <div class="flex items-center justify-between">
                             <h3 class="font-medium text-gray-700">Total a Pagar: $ {{$total}}</h3>
                         </div>
-                        <button class="bg-blue-800 text-white w-full mt-6 rounded-md py-1">
+                        <button wire:click='pay()' class="bg-blue-800 text-white w-full mt-6 rounded-md py-1">
                             Pagar
                         </button>
                     </div>

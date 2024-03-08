@@ -3,6 +3,7 @@
 
     @if($product)
     <div wire:loading.remove class="flex flex-col items-center md:flex-row">
+        @if ($product->images->count())
         {{-- images --}}
         <section x-data="{image: ''}" x-init="image = '{{$product->images[0]->name}}'"
             class="w-full max-w-xs md:max-w-full md:w-1/2 lg:w-1/3 dark:bg-gray-800 dark:text-gray-50">
@@ -15,6 +16,8 @@
                 @endforeach
             </div>
         </section>
+        @endif
+       
 
         {{-- details --}}
         <div class="w-full max-w-lg mx-auto mt-2 md:ml-8 md:mt-0 md:w-1/2">

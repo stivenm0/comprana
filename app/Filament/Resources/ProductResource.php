@@ -103,7 +103,7 @@ class ProductResource extends Resource
                     ->label('Sección')
                     ->searchable()
                     ->numeric()
-                    ->sortable(),
+                    ->sortable(true),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nombre')
                     ->searchable(),
@@ -126,6 +126,7 @@ class ProductResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->defaultSort('id', 'desc')
             ->filters([
                 //
             ])

@@ -10,6 +10,10 @@ class Order extends Model
 {
     use HasFactory;
 
+
+    const STATUS =  ['Procesando', 'En Camino', 'Entregado', 'No Entregado'];
+
+
     /**
      * Get the user that owns the Order
      *

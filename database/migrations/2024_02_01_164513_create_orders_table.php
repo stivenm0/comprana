@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Order;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->unsignedBigInteger('dispatcher_id')->nullable();
             $table->foreignId('cart_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->enum('status', ['Procesando', 'En Camino', 'Entregado', 'No Entregado', 'Cancelado'])->default('Procesando');
+            $table->enum('status', Order::STATUS)->default('Procesando');
             $table->decimal('total');
             $table->string('invoice');
             $table->string('address');

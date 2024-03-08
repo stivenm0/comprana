@@ -48,15 +48,17 @@ class User extends Authenticatable
     ];
 
     const ROLE_ADMIN = 'ADMINISTRADOR';
-    const ROLE_EDITOR = 'GESTOR';
+    const ROLE_EDITOR = 'EDITOR';
     const ROLE_DISPATCHER = 'DESPACHADOR';
+    const ROLE_DELIVERY = 'REPARTIDOR';
     const ROLE_USER = 'USUARIO';
     const ROLE_DEFAULT = self::ROLE_USER;
 
     const ROLES = [
         self::ROLE_ADMIN => 'Administrador',
-        self::ROLE_EDITOR => 'Gestor',
+        self::ROLE_EDITOR => 'Editor',
         self::ROLE_DISPATCHER => 'Despachador',
+        self::ROLE_DELIVERY => 'Repartidor',
         self::ROLE_USER => 'Usuario',
     ];
 
@@ -92,6 +94,10 @@ class User extends Authenticatable
 
     public function isDispatcher() : bool { 
         return $this->role === self::ROLE_DISPATCHER;
+    }
+
+    public function isDelivery() : bool { 
+        return $this->role === self::ROLE_DELIVERY;
     }
 
 }
