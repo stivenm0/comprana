@@ -50,6 +50,13 @@ return [
             'visibility' => 'public',
             'throw' => false,
         ],
+        'invoices' => [
+            'driver' => 'local',
+            'root' => storage_path('app/invoices'),
+            'url' => env('APP_URL').'/storage/invoices',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
 
         's3' => [
             'driver' => 's3',

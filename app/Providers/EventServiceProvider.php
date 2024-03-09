@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\CreateOrderEvent;
 use App\Listeners\CreateUserCarts;
+use App\Listeners\GenerateInvoiceListener;
 use App\Models\Image;
 use App\Models\Product;
 use App\Models\User;
@@ -25,6 +27,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
             CreateUserCarts::class
+        ],
+        CreateOrderEvent::class => [
+            GenerateInvoiceListener::class
         ],
     ];
 

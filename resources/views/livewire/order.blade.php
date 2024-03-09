@@ -77,7 +77,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($products as $product)
+                                            @foreach ($this->products as $product)
                                                 @php
                                                     $total += $product->price;
                                                 @endphp
@@ -127,7 +127,7 @@
                         <div class="flex items-center justify-between">
                             <h3 class="font-medium text-gray-700">Total a Pagar: $ {{$total}}</h3>
                         </div>
-                        <button wire:click='pay()' class="bg-blue-800 text-white w-full mt-6 rounded-md py-1">
+                        <button type="button" wire:click='pay()' class="bg-blue-800 text-white w-full mt-6 rounded-md py-1">
                             Pagar
                         </button>
                     </div>
