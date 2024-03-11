@@ -11,6 +11,14 @@ class Order extends Model
     use HasFactory;
 
 
+    protected $fillable = [
+        'user_id',
+        'Invoice',
+        'total',
+        'phone',
+        'address',
+    ];
+
     const STATUS =  ['Procesando', 'En Camino', 'Entregado', 'No Entregado'];
 
 
@@ -33,14 +41,11 @@ class Order extends Model
     {
         return $this->belongsTo(User::class, 'dispatcher_id', 'id');
     }
+    
 
-    /**
-     * Get the cart that owns the Order
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function cart(): BelongsTo
+    public function delivery(): BelongsTo
     {
-        return $this->belongsTo(Cart::class);
+        return $this->belongsTo(User::class, 'delivery_id', 'id');
     }
+
 }

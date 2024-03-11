@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Events\CreateOrderEvent;
+use App\Models\Order as ModelsOrder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
@@ -16,7 +17,10 @@ class Order extends Component
 
     public $step = 1;
 
-    public $total =0;
+    public $total = 0;
+
+    public $user;
+
 
     #[Validate('required|min:10|max:10')]
     public $phone =1234567891;
@@ -26,8 +30,13 @@ class Order extends Component
     public $cart;
 
     public function mount(){
-        // $user = Auth::user();
+        $this->user = Auth::user();
 
+        foreach($this->products as $product){
+            $this->total += $product->pivot->cant * $product->price;
+        }
+
+        // dd($this->total);
         // $this->phone = $user->phone;
         // $this->address = $user->address;
     }
@@ -40,6 +49,7 @@ class Order extends Component
     public function contacts(){
         $this->validate();
         $this->step= 2;
+
     }
 
     public function back(){
@@ -47,8 +57,16 @@ class Order extends Component
     }
 
     public function pay(){
-        // dd($this->products);
-         CreateOrderEvent::dispatch($this->products);
+        $order = ModelsOrder::create([
+            'user_id' => $this->user->id,
+            'cart_id' => $this->cart->id,
+            'phone' => $this->phone,
+            'address' => $this->address,
+            'total' => $this->total,
+
+        ]);
+
+         CreateOrderEvent::dispatch($this->products, $order);
     }
 
 

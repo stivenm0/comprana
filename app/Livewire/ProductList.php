@@ -43,7 +43,7 @@ class ProductList extends Component
     }
 
 
-    #[Computed()]
+    #[Computed(true)]
     public function products()  {
         $query = Product::select('id','name', 'price', 'stock', 'section_id')->search($this->search)
         ->with(['image:product_id,name']);

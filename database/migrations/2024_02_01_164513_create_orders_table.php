@@ -16,14 +16,15 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->unsignedBigInteger('dispatcher_id')->nullable();
-            $table->foreignId('cart_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->unsignedBigInteger('delivery_id')->nullable();
             $table->enum('status', Order::STATUS)->default('Procesando');
-            $table->decimal('total');
-            $table->string('invoice');
+            $table->decimal('total', 15);
+            $table->string('invoice')->nullable();
             $table->string('address');
             $table->string('phone', 10);
 
             $table->foreign('dispatcher_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('delivery_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

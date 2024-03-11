@@ -17,7 +17,7 @@ class CreateOrderEvent
     /**
      * Create a new event instance.
      */
-    public function __construct(public $products)
+    public function __construct(public $products, public $order)
     {
         //
     }

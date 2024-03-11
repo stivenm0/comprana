@@ -78,20 +78,17 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($this->products as $product)
-                                                @php
-                                                    $total += $product->price;
-                                                @endphp
                                                 <tr class="bg-gray-100 border-b">
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                    <td class="px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900">
                                                         {{ $product->name }}
                                                     </td>
-                                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
                                                         {{ $product->price }}
                                                     </td>
-                                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <td class="text-sm text-center text-gray-900 font-light px-6 py-2 whitespace-nowrap">
                                                         {{ $product->pivot->cant }}
                                                     </td>
-                                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
                                                         {{ $product->pivot->cant * $product->price }}
                                                     </td>
                                                 </tr>
