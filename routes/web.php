@@ -34,6 +34,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/carritos/{id}/ordenar', [OrderController::class, 'create'])->name('orders.create');
 
     Route::get('/pedidos', [OrderController::class, 'index'])->name('orders.index');
+
+    Route::get('/facturas/{name}', [OrderController::class, 'showInvoice'])->name('orders.invoice');
+
+
 });
 
 

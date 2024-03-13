@@ -14,6 +14,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Actions\ActionGroup;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class UserResource extends Resource
 {
@@ -67,10 +68,11 @@ class UserResource extends Resource
                     ->label('Rol')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
-                        'ADMINISTRADOR' => 'gray',
+                        'ADMINISTRADOR' => 'primary',
                         'DESPACHADOR' => 'warning',
-                        'GESTOR' => 'success',
-                        'USUARIO' => 'danger',
+                        'REPARTIDOR' => 'warning',
+                        'EDITOR' => 'success',
+                        'USUARIO' => 'gray',
                     })
                     ->sortable()
                     ->searchable(),
@@ -111,6 +113,7 @@ class UserResource extends Resource
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make()
                     ->hidden(fn (User $record): bool => $record->isAdmin()),
+                    ExportBulkAction::make()
                 ])
             ])
             ->bulkActions([

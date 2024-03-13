@@ -4,26 +4,28 @@
    @forelse ($this->orders as $order)
    @php
       $color = match($order->status){
-         'Procesando' => 'yellow-600',
-         'Enviado' => 'blue-600',
+         'Procesando' => 'blue-600',
+         'En Camino' => 'yellow-600',
          'Entregado' => 'green-600',
          'No Entregado' => 'gray-800',
-         'Cancelado' => 'red-600'
       }
    @endphp
-   <div class="bg-gray-100 mx-auto border-gray-500 border rounded-sm text-gray-700 mb-0.5 h-30">
-      <div class="flex flex-wrap p-3 border-l-8 border-{{$color}}">
+   <div class="bg-gray-100  mx-auto border-gray-500 border rounded-sm text-gray-700 mb-0.5 h-30">
+      <div class="flex flex-wrap p-3 border-l-8 border-{{$color}} ">
          <div class="pr-3 ml-3 space-y-1 sm:border-r-2">
             <div class="text-sm font-semibold leading-5"><span class="text-xs font-normal leading-4 text-gray-500">
-                  ID#</span> {{$order->id}}</div>
+                  #</span> Order{{$order->id}}</div>
 
             <div class="text-sm font-semibold leading-5">
                {{$order->created_at->format('M j. g:i A') }}
             </div>
+            <a href="{{route('orders.invoice', ['name'=> ($order->invoice ?? 'NN') ])}}" 
+               class="text-sm font-semibold leading-5 underline text-purple-800 " target="blank"  >
+               Factura ▶
+            </a>
          </div>
          <div class="flex-1">
             <div class="pr-3 ml-3 space-y-1 sm:border-r-2">
-               <div class="text-base font-normal leading-6">{{$order->cart->name}}</div>
                <div class="text-sm font-normal leading-4"><span class="text-xs font-normal leading-4 text-gray-500">
                      Teléfono</span>
                      {{$order->phone}}
@@ -31,6 +33,10 @@
                <div class="text-sm font-normal leading-4"><span class="text-xs font-normal leading-4 text-gray-500">
                      Destino</span>
                      {{$order->address}}
+               </div>
+               <div class="text-sm font-normal leading-4"><span class="text-xs font-normal leading-4 text-gray-500">
+                     Total</span>
+                     $ {{$order->total}}
                </div>
             </div>
          </div>

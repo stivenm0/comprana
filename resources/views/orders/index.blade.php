@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <x-commons.info-list title="Información de Carritos" :list="[
+    <x-commons.info-list title="Información de Pedidos" :list="[
        'Procesando: El pedido se está alistando para ser enviado.',
        'En Camino: El pedido ha sido enviado y está en camino a su destino.',
        'Entregado: El pedido ha sido entregado en el destino.',

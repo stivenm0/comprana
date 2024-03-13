@@ -13,14 +13,21 @@ class Order extends Model
 
     protected $fillable = [
         'user_id',
+        'dispatcher_id',
+        'delivery_id',
         'Invoice',
         'total',
         'phone',
         'address',
+        'status',
     ];
 
     const STATUS =  ['Procesando', 'En Camino', 'Entregado', 'No Entregado'];
 
+    protected $casts = [
+        'total' => 'int',
+        // 'images' => 'array',
+    ];
 
     /**
      * Get the user that owns the Order

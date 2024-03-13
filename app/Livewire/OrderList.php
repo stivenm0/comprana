@@ -19,7 +19,7 @@ class OrderList extends Component
 
     #[Computed()]
     public function orders(){
-        $query = Order::with('cart:id,name');
+        $query = Order::orderBy('id', 'desc');
 
         if($this->status != ''){
             $query->where('status', $this->status);
