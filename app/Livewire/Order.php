@@ -25,7 +25,7 @@ class Order extends Component
     #[Validate('required|min:10|max:10')]
     public $phone =1234567891;
     #[Validate('required|min:5|max:255')]
-    public $address = "loremfsdfadf";
+    public $address = "p into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
 
     public $cart;
 
@@ -43,13 +43,13 @@ class Order extends Component
 
     #[Computed(true)]
     public function products() {
-        return  $this->cart->products()->select('name', 'price')->get();
+        return  $this->cart->products()->select('product_id','name', 'price', 'stock')
+        ->where('stock', '>', 0)->get();
     }
 
     public function contacts(){
         $this->validate();
         $this->step= 2;
-
     }
 
     public function back(){
@@ -63,10 +63,12 @@ class Order extends Component
             'phone' => $this->phone,
             'address' => $this->address,
             'total' => $this->total,
-
         ]);
 
          CreateOrderEvent::dispatch($this->products, $order);
+
+         $this->dispatch('notification', 
+        "Compra realizada");
     }
 
 

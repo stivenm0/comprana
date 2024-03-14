@@ -15,7 +15,7 @@ class Order extends Model
         'user_id',
         'dispatcher_id',
         'delivery_id',
-        'Invoice',
+        'invoice',
         'total',
         'phone',
         'address',

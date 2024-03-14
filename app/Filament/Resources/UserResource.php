@@ -113,12 +113,12 @@ class UserResource extends Resource
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make()
                     ->hidden(fn (User $record): bool => $record->isAdmin()),
-                    ExportBulkAction::make()
                 ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    ExportBulkAction::make()
                 ]),
             ])->checkIfRecordIsSelectableUsing(
                     fn (User $record): bool => !$record->isAdmin(),

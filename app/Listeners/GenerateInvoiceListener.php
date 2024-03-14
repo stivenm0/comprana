@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\CreateOrderEvent;
+use App\Models\Product;
 use Codedge\Fpdf\Fpdf\Fpdf;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -46,7 +47,7 @@ class GenerateInvoiceListener
     
         $this->pdf->MultiCell(0,5,iconv("UTF-8", "ISO-8859-1","Fecha: ".date("d/m/Y", strtotime("13-09-2022"))." ".date("h:s A")),0,'C',false);
         $this->pdf->SetFont('Arial','B',10);
-        $this->pdf->MultiCell(0,5,iconv("UTF-8", "ISO-8859-1",strtoupper("Ticket {$nameInvoice}")),0,'C',false);
+        $this->pdf->MultiCell(0,5,iconv("UTF-8", "ISO-8859-1",strtoupper("Ticket order{$event->order->id}")),0,'C',false);
         $this->pdf->SetFont('Arial','',9);
     
         $this->pdf->Ln(1);
@@ -82,11 +83,6 @@ class GenerateInvoiceListener
         /*----------  Fin Detalles de la tabla  ----------*/
         }
     
-    
-        $this->pdf->Cell(72,5,iconv("UTF-8", "ISO-8859-1","-------------------------------------------------------------------"),0,0,'C');
-    
-        $this->pdf->Ln(5);
-    
         $this->pdf->Cell(72,5,iconv("UTF-8", "ISO-8859-1","-------------------------------------------------------------------"),0,0,'C');
     
         $this->pdf->Ln(5);
@@ -110,5 +106,14 @@ class GenerateInvoiceListener
          ]);
 
          $this->pdf->close();
+
+         foreach($event->products as $product){
+            $p =Product::select('id','stock')->find($product->product_id);
+            
+            $p->update([
+                'stock' => $p->stock -= $product->pivot->cant
+            ]);
+         }
+
     }
 }
