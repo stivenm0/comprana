@@ -17,6 +17,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.4",
+        "mercadopago/dx-php": "^3.0",
         "pxlrbt/filament-excel": "^2.3"
     },
     "require-dev": {

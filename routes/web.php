@@ -29,9 +29,14 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/carritos', [CartController::class, 'index'])->name('carts.index');
+
     Route::get('/carritos/{cart}', [CartController::class, 'show'])->name('carts.show'); 
     
     Route::get('/carritos/{id}/ordenar', [OrderController::class, 'create'])->name('orders.create');
+
+    Route::get('/carritos/{id}/ordenar/{order}', [OrderController::class, 'payOrder'])->name('orders.pay');
+
+    Route::get('/pedido/{order}/estado', [OrderController::class, 'orderComplete'])->name('orders.complete');
 
     Route::get('/pedidos', [OrderController::class, 'index'])->name('orders.index');
 

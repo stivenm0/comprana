@@ -75,10 +75,10 @@ class GenerateInvoiceListener
     
         /*----------  Detalles de la tabla  ----------*/
         foreach($event->products as $product){
-        $this->pdf->MultiCell(0,4,iconv("UTF-8", "ISO-8859-1",$product->name),0,'C',false);
-        $this->pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",$product->pivot->cant),0,0,'C');
-        $this->pdf->Cell(19,4,iconv("UTF-8", "ISO-8859-1","$".$product->price),0,0,'C');
-        $this->pdf->Cell(28,4,iconv("UTF-8", "ISO-8859-1","$".$product->price * $product->pivot->cant),0,0,'C');
+        $this->pdf->MultiCell(0,4,iconv("UTF-8", "ISO-8859-1",$product->title),0,'C',false);
+        $this->pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",$product->quantity),0,0,'C');
+        $this->pdf->Cell(19,4,iconv("UTF-8", "ISO-8859-1","$".$product->unit_price),0,0,'C');
+        $this->pdf->Cell(28,4,iconv("UTF-8", "ISO-8859-1","$".$product->unit_price * $product->quantity),0,0,'C');
         $this->pdf->Ln(4);
         /*----------  Fin Detalles de la tabla  ----------*/
         }

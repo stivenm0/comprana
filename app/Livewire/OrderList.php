@@ -19,13 +19,13 @@ class OrderList extends Component
 
     #[Computed()]
     public function orders(){
-        $query = Order::orderBy('id', 'desc');
+        $query = Order::where('user_id', Auth::user()->id)->orderBy('id', 'desc');
 
         if($this->status != ''){
             $query->where('status', $this->status);
         }
 
-        return $query->paginate(4);
+        return $query->paginate(5);
     }
 
 
