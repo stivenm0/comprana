@@ -20,6 +20,7 @@ class Order extends Model
         'phone',
         'address',
         'status',
+        'payment_id',
     ];
 
     const STATUS =  ['Procesando', 'En Camino', 'Entregado', 'No Entregado'];

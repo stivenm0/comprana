@@ -21,11 +21,11 @@
         $preference = $client->create([
             "items"=> $products,
             "back_urls" =>array(
-            "success" => route('orders.complete', [$cart, $order]),
-            "failure" => route('orders.complete', [$cart, $order]),
-            "pending" => route('orders.complete', [$cart, $order]),
+            "success" => route('orders.complete', ['order'=>$order]),
+            "failure" => route('orders.pay', [$cart, $order]),
+            "pending" => route('orders.pay', [$cart, $order]),
             ),
-            "auto_return"=> "all",
+            "auto_return"=> "approved",
             "payment_methods" => array(
                 "excluded_payment_types" => array(
                 array("id" => "ticket")

@@ -66,20 +66,25 @@ class OrderController extends Controller
 
     }
 
-    public function orderComplete(Request $request, Order $order){
+    public function orderComplete(Order $order, Request $request){
+        $this->authorize('author', $order);
+        if($order->payment_id){
+            return redirect(route('orders.index'));
+        }
+        
         $response = Http::withToken(config('services.mercadopago.token'))
         ->withUrlParameters([
             'id' => $request->payment_id,
         ])
         ->get('https://api.mercadopago.com/v1/payments/{id}');
 
-        return $response['additional_info']['items'];
+        if($response->successful() && is_null($order->payment_id)){
+            CreateOrderEvent::dispatch($response['additional_info']['items'], $order);
 
-        CreateOrderEvent::dispatch($response['additional_info']['items'], $order);
+            $order->update(['payment_id'=> $response['id']]);
+        }
 
-        return view('orders.payComplete', [
-            'status'=> "success"
-        ]);
+        return view('orders.payComplete');
     }
 
 

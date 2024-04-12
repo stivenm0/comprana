@@ -28,6 +28,7 @@ class GenerateInvoiceListener
         
         $nameInvoice = "order{$event->order->id}.pdf";
 
+        $total = 0;
         $user = Auth::user();
 
         $this->pdf->SetMargins(4,6,4);
@@ -75,12 +76,13 @@ class GenerateInvoiceListener
     
         /*----------  Detalles de la tabla  ----------*/
         foreach($event->products as $product){
-        $this->pdf->MultiCell(0,4,iconv("UTF-8", "ISO-8859-1",$product->title),0,'C',false);
-        $this->pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",$product->quantity),0,0,'C');
-        $this->pdf->Cell(19,4,iconv("UTF-8", "ISO-8859-1","$".$product->unit_price),0,0,'C');
-        $this->pdf->Cell(28,4,iconv("UTF-8", "ISO-8859-1","$".$product->unit_price * $product->quantity),0,0,'C');
+        $this->pdf->MultiCell(0,4,iconv("UTF-8", "ISO-8859-1",$product['title']),0,'C',false);
+        $this->pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",$product['quantity']),0,0,'C');
+        $this->pdf->Cell(19,4,iconv("UTF-8", "ISO-8859-1","$".$product['unit_price']),0,0,'C');
+        $this->pdf->Cell(28,4,iconv("UTF-8", "ISO-8859-1","$".$product['unit_price'] * $product['quantity']),0,0,'C');
         $this->pdf->Ln(4);
         /*----------  Fin Detalles de la tabla  ----------*/
+        $total += $product['unit_price'] * $product['quantity'];
         }
     
         $this->pdf->Cell(72,5,iconv("UTF-8", "ISO-8859-1","-------------------------------------------------------------------"),0,0,'C');
@@ -89,7 +91,7 @@ class GenerateInvoiceListener
         
         $this->pdf->Cell(18,5,iconv("UTF-8", "ISO-8859-1",""),0,0,'C');
         $this->pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1","TOTAL PAGADO"),0,0,'C');
-        $this->pdf->Cell(32,5,iconv("UTF-8", "ISO-8859-1","$ {$event->order->total}"),0,0,'C');
+        $this->pdf->Cell(32,5,iconv("UTF-8", "ISO-8859-1","$ {$total}"),0,0,'C');
     
         $this->pdf->Ln(10);
     
@@ -102,16 +104,17 @@ class GenerateInvoiceListener
          Storage::disk('invoices')->put($nameInvoice, $this->pdf->Output('S'));
 
          $event->order->update([
-            'invoice'=> $nameInvoice
+            'invoice'=> $nameInvoice,
+            'total'=> $total,
          ]);
 
          $this->pdf->close();
 
          foreach($event->products as $product){
-            $p =Product::select('id','stock')->find($product->product_id);
+            $p =Product::select('id','stock')->firstWhere('name', $product['title']);
             
             $p->update([
-                'stock' => $p->stock -= $product->pivot->cant
+                'stock' => $p->stock -= $product['quantity']
             ]);
          }
 

@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use App\Livewire\Order;
 use App\Models\Cart;
+use App\Models\Order as ModelsOrder;
 use App\Policies\ResourcePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -18,6 +19,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Cart::class => ResourcePolicy::class,
+        ModelsOrder::class => ResourcePolicy::class,
     ];
 
     /**
