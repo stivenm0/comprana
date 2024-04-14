@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WebhooksController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -41,9 +42,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/pedidos', [OrderController::class, 'index'])->name('orders.index');
 
     Route::get('/facturas/{name}', [OrderController::class, 'showInvoice'])->name('orders.invoice');
-
-
 });
+
+    Route::post('/webhooks', WebhooksController::class)->name('webhooks');
 
 
 require __DIR__.'/auth.php';

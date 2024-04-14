@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Events\CreateOrderEvent;
 use App\Listeners\CreateUserCarts;
 use App\Listeners\GenerateInvoiceListener;
+use App\Listeners\SendEmailOrderListener;
 use App\Models\Image;
 use App\Models\Product;
 use App\Models\User;
@@ -28,7 +29,8 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         CreateOrderEvent::class => [
-            GenerateInvoiceListener::class
+            GenerateInvoiceListener::class,
+            SendEmailOrderListener::class
         ],
     ];
 

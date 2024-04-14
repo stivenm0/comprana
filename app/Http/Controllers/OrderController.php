@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\CreateOrderEvent;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Notifications\OrderEmailNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -36,6 +37,9 @@ class OrderController extends Controller
 
     public function payOrder($id, Order $order) 
     {
+        if($order->payment_id){
+            return redirect()->route('orders.index');
+        }
         $cart = Cart::with(['products'=> function($q){
             $q->select('name', 'price', 'stock')
             ->where('stock', '>', 0);
@@ -68,8 +72,9 @@ class OrderController extends Controller
 
     public function orderComplete(Order $order, Request $request){
         $this->authorize('author', $order);
+
         if($order->payment_id){
-            return redirect(route('orders.index'));
+            return redirect()->route('orders.index');
         }
         
         $response = Http::withToken(config('services.mercadopago.token'))
@@ -78,13 +83,12 @@ class OrderController extends Controller
         ])
         ->get('https://api.mercadopago.com/v1/payments/{id}');
 
-        if($response->successful() && is_null($order->payment_id)){
-            CreateOrderEvent::dispatch($response['additional_info']['items'], $order);
-
-            $order->update(['payment_id'=> $response['id']]);
+        if($response->successful()){
+            return view('orders.payComplete', [
+            'status'=> $response['status']
+            ]);
         }
-
-        return view('orders.payComplete');
+        abort('404');
     }
 
 

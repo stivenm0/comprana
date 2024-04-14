@@ -18,10 +18,11 @@ return new class extends Migration
             $table->unsignedBigInteger('dispatcher_id')->nullable();
             $table->unsignedBigInteger('delivery_id')->nullable();
             $table->enum('status', Order::STATUS)->default('Procesando');
-            $table->decimal('total', 15);
+            $table->decimal('total', 15)->nullable();
             $table->string('invoice')->nullable();
             $table->string('address');
             $table->string('phone', 10);
+            $table->integer('payment_id')->nullable();
 
             $table->foreign('dispatcher_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('delivery_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();

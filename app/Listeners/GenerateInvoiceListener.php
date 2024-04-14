@@ -29,7 +29,7 @@ class GenerateInvoiceListener
         $nameInvoice = "order{$event->order->id}.pdf";
 
         $total = 0;
-        $user = Auth::user();
+        $user = $event->order->user;
 
         $this->pdf->SetMargins(4,6,4);
         $this->pdf->AddPage(size: array(80,258));

@@ -45,7 +45,7 @@ class Order extends Component
 
         return redirect(route('orders.pay',[
             'id'=> $this->cart->id,
-            'order'=> $order->id,
+            'order'=> $order,
         ]));
 
     }

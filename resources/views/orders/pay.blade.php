@@ -23,7 +23,7 @@
             "back_urls" =>array(
             "success" => route('orders.complete', ['order'=>$order]),
             "failure" => route('orders.pay', [$cart, $order]),
-            "pending" => route('orders.pay', [$cart, $order]),
+            "pending" => route('orders.complete', ['order'=>$order]),
             ),
             "auto_return"=> "approved",
             "payment_methods" => array(
@@ -31,7 +31,10 @@
                 array("id" => "ticket")
             ),
              "installments" => 1
-            )
+            ),
+            "notification_url"=> "https://c103-200-10-31-234.ngrok-free.app/comprana/public/webhooks?order=$order->id"
+            // route('webhooks', ['order'=>$order])
+            ,
         ]);
 
         $total = 0;
