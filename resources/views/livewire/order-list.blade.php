@@ -51,6 +51,10 @@
                      Total</span>
                      $ {{$order->total}}
                </div>
+               <div class="text-sm font-normal leading-4"><span class="text-xs font-normal leading-4 text-gray-500">
+                     Estado de Pago</span>
+                     {{$order->payment_status}}
+               </div>
             </div>
          </div>
          <div>

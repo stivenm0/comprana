@@ -109,6 +109,15 @@ class OrderResource extends Resource
                         'No Entregado' => 'danger',
                     })
                     ->sortable(),
+                Tables\Columns\TextColumn::make('payment_id')
+                ->label('id de pago'),
+                Tables\Columns\TextColumn::make('payment_status')
+                ->label('Estado de pago')
+                ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'approved' => 'success',
+                        'pending' => 'warning',
+                    }),
                 Tables\Columns\TextColumn::make('total')
                     ->prefix('$')
                     ->numeric(),

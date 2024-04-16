@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Events\CreateOrderEvent;
 use App\Models\Order;
-use DragonCode\Contracts\Cashier\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 

@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('address');
             $table->string('phone', 10);
             $table->integer('payment_id')->nullable();
+            $table->status('payment_status')->nullable()
+            ;
 
             $table->foreign('dispatcher_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('delivery_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();

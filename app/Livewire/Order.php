@@ -17,20 +17,17 @@ class Order extends Component
     #[Locked] 
     public $user;
 
-
     #[Validate('required|min:10|max:10')]
-    public $phone =1234567891;
+    public $phone = "";
     #[Validate('required|min:5|max:255')]
-    public $address = "p into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lor";
+    public $address = "";
 
     public $cart;
 
     public function mount(){
         $this->user = Auth::user();
-
-
-        // $this->phone = $user->phone;
-        // $this->address = $user->address;
+        $this->phone = $this->user->phone;
+        $this->address = $this->user->address;
     }
 
 
@@ -43,11 +40,10 @@ class Order extends Component
             'address' => $this->address,
         ]);
 
-        return redirect(route('orders.pay',[
+        $this->redirectRoute('orders.pay', [
             'id'=> $this->cart->id,
             'order'=> $order,
-        ]));
-
+        ]);
     }
 
     public function render()
