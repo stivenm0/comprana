@@ -1,5 +1,4 @@
  <?php
-        // require base_path('/vendor/autoload.php');
     
         use MercadoPago\MercadoPagoConfig;
         use MercadoPago\Client\Preference\PreferenceClient;
