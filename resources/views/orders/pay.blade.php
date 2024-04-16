@@ -32,8 +32,7 @@
             ),
              "installments" => 1
             ),
-            "notification_url"=> "https://c103-200-10-31-234.ngrok-free.app/comprana/public/webhooks?order=$order->id"
-            // route('webhooks', ['order'=>$order])
+            "notification_url"=> route('webhooks', ['order'=>$order])
             ,
         ]);
 
