@@ -12,17 +12,17 @@ Comprana es una aplicación web monolítica que permite comprar víveres desde c
 
 ## Capturas
 
-![inicio](https://github.com/stivenm0/comprana/main/public/img/inicio.png)
+![inicio](https://raw.github.com/stivenm0/comprana/main/public/img/inicio.png)
 
-![tienda](https://github.com/stivenm0/comprana/main/public/img/tienda.png)
+![tienda](https://raw.github.com/stivenm0/comprana/main/public/img/tienda.png)
 
-![carritos](https://github.com/stivenm0/comprana/main/public/img/carritos.png)
+![carritos](https://raw.github.com/stivenm0/comprana/main/public/img/carritos.png)
 
-![pedidos](https://github.com/stivenm0/comprana/main/public/img/pedidos.png)
+![pedidos](https://raw.github.com/stivenm0/comprana/main/public/img/pedidos.png)
 
-![compra](https://github.com/stivenm0/comprana/main/public/img/compra.png)
+![compra](https://raw.github.com/stivenm0/comprana/main/public/img/compra.png)
 
-![admin](https://github.com/stivenm0/comprana/main/public/img/admin.png)
+![admin](https://raw.github.com/stivenm0/comprana/main/public/img/admin.png)
 
 
 
