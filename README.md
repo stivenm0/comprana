@@ -8,7 +8,6 @@ Comprana es una aplicación web monolítica que permite comprar víveres desde c
 * [Requerimientos](#requerimientos)
 * [Instalación](#instalación)
 * [Tecnologías](#tecnologías)
-* [License](#license)
 
 ## Capturas
 
@@ -37,7 +36,7 @@ Package | Version
 [Mysql](https://www.mysql.com/)  |V 8.0.30
 
 
-## Instalación 🔧
+## Instalación
 Así es como puede ejecutar el proyecto localmente:
 
 1. Clonar repositorio
@@ -58,7 +57,7 @@ Así es como puede ejecutar el proyecto localmente:
 
 1. Crea enlace simbólico 
     ```sh
-        php artisan storage:link
+    php artisan storage:link
     ```
 
 1. Instala dependencias PHP 
@@ -87,7 +86,7 @@ Así es como puede ejecutar el proyecto localmente:
     ```
 
 
-## Construido con 🛠️
+## Tecnologías
 
 * Laravel 10
 * Livewire 3
@@ -95,3 +94,6 @@ Así es como puede ejecutar el proyecto localmente:
 * MySQL
 * TailwindCss
 * Apine
+
+## DB
+![DB](https://raw.github.com/stivenm0/comprana/main/public/img/compranaDB.jpg)
