@@ -2,6 +2,8 @@
 
 Comprana es una aplicación web monolítica que permite comprar víveres desde casa y recibirlos en la puerta. Ofrece una amplia gama de productos, una interfaz intuitiva para buscar y comprar.
 
+video: https://youtu.be/8wZqrtXeqaA
+
 ## Contenido
 
 * [Capturas](#capturas)
