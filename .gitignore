@@ -20,6 +20,8 @@ yarn-error.log
 
 # Laravel Boost
 /.agents/
+/.opencode/
+/.impeccable/
 /.gemini/
 /AGENTS.md
 /GEMINI.md
