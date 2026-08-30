@@ -32,12 +32,18 @@ Se recomienda el uso de **Laravel Sail** (Docker) para un entorno de desarrollo 
     ```
 
 5.  **Instalación Automática de la App**:
-    Este comando genera la key, ejecuta migraciones, seeders, vincula el storage, genera roles/permisos, permite crear el primer administrador e instala Laravel Boost:
+    Este comando genera la key, ejecuta migraciones, seeders, vincula el storage, genera roles/permisos y permite crear el primer administrador:
     ```bash
     ./vendor/bin/sail artisan app:install
     ```
 
-6.  **Compilar Assets**:
+6.  **Configurar Agente IA**:
+    Configura Laravel Boost para tu agente preferido (opencode, Claude Code, Cursor, etc.):
+    ```bash
+    ./vendor/bin/sail artisan boost:install
+    ```
+
+7.  **Compilar Assets**:
     ```bash
     ./vendor/bin/sail npm install
     ./vendor/bin/sail npm run build
@@ -62,7 +68,8 @@ El proyecto requiere configurar las siguientes variables en el archivo `.env`:
 
 ### Comandos Personalizados
 
-*   `php artisan app:install`: Realiza todo el setup inicial interactivo (migraciones, seeders, roles, admin, Laravel Boost).
+*   `php artisan app:install`: Realiza todo el setup inicial interactivo (migraciones, seeders, roles, admin).
+*   `php artisan boost:install`: Configura Laravel Boost para tu agente de IA preferido (guías, skills y MCP).
 *   `php artisan clean-orders`: Elimina órdenes sin pago registradas hace más de un mes.
 
 ### 🧪 Pruebas (Testing)

@@ -49,8 +49,6 @@ class AppInstall extends Command
 
         $this->createAdminUser();
 
-        $this->installBoost();
-
         $this->info('🎉 Super panel installation completed successfully!');
     }
 
@@ -170,22 +168,6 @@ class AppInstall extends Command
         }
 
         $this->info("✅ Admin user '{$adminUser->name}' created and assigned the '{$this->getAdminRoleName()}' role successfully.");
-    }
-
-    /**
-     * Install Laravel Boost guidelines, skills, and MCP configuration.
-     */
-    protected function installBoost(): void
-    {
-        $this->info('🤖 Installing Laravel Boost...');
-
-        Artisan::call('boost:install', [
-            '--guidelines' => true,
-            '--skills' => true,
-            '--mcp' => true,
-        ], $this->getOutput());
-
-        $this->info('✅ Laravel Boost installed successfully.');
     }
 
     /**
